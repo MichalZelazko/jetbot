@@ -1,0 +1,5 @@
+*.pth
+*.whl
+.vscode
+__pycache__
+Gamepad
