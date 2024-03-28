@@ -71,13 +71,13 @@ class AI(SteeringActions):
             # Alexnet no trt 
             # AlexNet_final_NllLoss (9/10) - erros only with big speeds - good in bad and good light
             # AlexNet_final_CrossEntropy - 
-        self.model = torchvision.models.alexnet(pretrained=True)
-        self.model.classifier[6] = torch.nn.Linear(self.model.classifier[6].in_features, 5)
-        self.model.load_state_dict(torch.load('AlexNet_final_CrossEntropy.pth'))
-        self.device = torch.device('cuda')
-        self.model = self.model.to(self.device)
-        self.mean = 255.0 * np.array([0.485, 0.456, 0.406])
-        self.std = 255.0 * np.array([0.229, 0.224, 0.225])
+        # self.model = torchvision.models.alexnet(pretrained=True)
+        # self.model.classifier[6] = torch.nn.Linear(self.model.classifier[6].in_features, 5)
+        # self.model.load_state_dict(torch.load('AlexNet_final_CrossEntropy.pth'))
+        # self.device = torch.device('cuda')
+        # self.model = self.model.to(self.device)
+        # self.mean = 255.0 * np.array([0.485, 0.456, 0.406])
+        # self.std = 255.0 * np.array([0.229, 0.224, 0.225])
             # End Alexnet no trt
             # Alexnet trt - works very poorly. For AlexNet_final_NllLoss_TRT a little better (6/10) then for AlexNet_final_CrossEntropy_TRT (5/10)
         # self.device = torch.device('cuda')
@@ -87,16 +87,16 @@ class AI(SteeringActions):
         # self.std = torch.Tensor([0.229, 0.224, 0.225]).cuda().half()
             # End Alexnet trt
             # ResNet18 no trt (Resnet18_final_CrossEntropy 6.5/10, Resnet18_final_nllLoss 5/10)
-        # self.set_speed(0)
-        # self.set_turn(0)
-        # self.model = torchvision.models.resnet18(pretrained=True)
-        # self.model.fc = torch.nn.Linear(512, 5)
-        # self.model.load_state_dict(torch.load('Resnet18_final_nllLoss.pth'))
-        # self.device = torch.device('cuda')
-        # self.model = self.model.to(self.device)
-        # self.model = self.model.eval().half()
-        # self.mean = torch.Tensor([0.485, 0.456, 0.406]).cuda().half()
-        # self.std = torch.Tensor([0.229, 0.224, 0.225]).cuda().half()
+        self.set_speed(0)
+        self.set_turn(0)
+        self.model = torchvision.models.resnet18(pretrained=True)
+        self.model.fc = torch.nn.Linear(512, 5)
+        self.model.load_state_dict(torch.load('best_model_resnet18.pth'))
+        self.device = torch.device('cuda')
+        self.model = self.model.to(self.device)
+        self.model = self.model.eval().half()
+        self.mean = torch.Tensor([0.485, 0.456, 0.406]).cuda().half()
+        self.std = torch.Tensor([0.229, 0.224, 0.225]).cuda().half()
             # End ResNet18 no trt
             # ResNet18 trt (Resnet18_final_CrossEntropy_TRT 6.5/10, Resnet18_final_nllLoss_TRT best trt model 7.2/10, usefull for good lightining conditions
         # self.device = torch.device('cuda')
