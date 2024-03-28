@@ -54,19 +54,19 @@ def manage_threads():
     global run
 
     t_nn = threading.Thread(target=neural_network)
-    t_communication = threading.Thread(target=communication)
+    # t_communication = threading.Thread(target=communication)
     t_controller = threading.Thread(target=controller)
     t_manual_steering = threading.Thread(target=manual_steering)
 
     t_nn.daemon = True
     t_controller.daemon = True
     t_manual_steering.daemon = True
-    t_communication.daemon = True
+    # t_communication.daemon = True
 
     t_controller.start()
     t_nn.start()  # default steering
     t_manual_steering.start()
-    t_communication.start()
+    # t_communication.start()
 
     while True:
         if not q.empty():
